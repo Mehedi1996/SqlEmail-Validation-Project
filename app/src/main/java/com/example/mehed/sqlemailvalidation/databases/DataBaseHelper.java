@@ -1,42 +1,39 @@
-package com.example.mehed.sqlemailvalidation;
+package com.example.mehed.sqlemailvalidation.databases;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import android.widget.Toast;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
-    private DataBaseHelper dataBaseHelper;
-    public Context context;
+import com.example.mehed.sqlemailvalidation.models.PersonDetail;
 
+public class DataBaseHelper extends SQLiteOpenHelper {
+    private Context context;
 
     private static final String DATABASE_NAME = "information";
     private static final String TABLE_NAME = "Email";
+    private static final int VERSION = 1;
+
+    private static final String COLUMN_ID = "id";
+    private static final String USER_NAME = "user_name";
     private static final String NAME = "name";
     private static final String USER_EMAIL = "email_name";
     private static final String PASSWORD = "password";
-    private static final String USER_NAME = "user_name";
-    private static final int VERSION = 1;
-    private static final String COLUMN_ID = "id";
-    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + NAME + " TEXT,"
             + USER_EMAIL + " TEXT,"
             + USER_NAME + " TEXT,"
             + PASSWORD + " TEXT"
             + ")";
 
-
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
         this.context = context;
-
-
-
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -49,7 +46,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    long insertData(PersonDetails personDetails) {
+    public long insertData(PersonDetail personDetails) {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -61,12 +59,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
-    boolean FINDPASS(String username, String password) {
+    public boolean checkEmailPassword(String username, String password) {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
         boolean result = false;
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
         if (cursor.getCount() == 0) {
-           Toast.makeText(context, "No data Found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No data Found", Toast.LENGTH_SHORT).show();
         } else {
             if (cursor.moveToFirst()) {
                 do {

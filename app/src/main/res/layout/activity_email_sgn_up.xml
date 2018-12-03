@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EmailSgnUpActivity">
+    android:layout_margin="10dp"
+    tools:context=".activities.EmailSignUpActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,34 +16,34 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NAME:"/>
+            android:text="@string/name"/>
+
         <EditText
-            android:id="@+id/NameBT"
-            android:layout_width="wrap_content"
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>
-
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content">
 
         <TextView
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email:"/>
-        <EditText
-            android:id="@+id/EmailBT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:text="@string/email"/>
 
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content">
 
         <TextView
@@ -49,38 +51,38 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User_Name:"/>
+            android:text="@string/user_name"/>
+
         <EditText
-            android:id="@+id/UsernameBT"
-            android:layout_width="wrap_content"
+            android:id="@+id/etUserNameForSignUp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>
-
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content">
 
         <TextView
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password:"/>
-        <EditText
-            android:id="@+id/PasswordBT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:text="@string/password"/>
 
+        <EditText
+            android:id="@+id/etPasswordForSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
     <Button
         android:onClick="Save"
-        android:id="@+id/SignupBT"
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SIGNUP"/>
-
+        android:text="@string/sign_up"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
